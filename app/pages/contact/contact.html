@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en" >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ePageo</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="../../epageo.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../.tmp/styles/main.css">
+    <link rel="stylesheet" href="../../.tmp/styles/app.css">
+    <link rel="stylesheet" href="../../icons/icomatic.css">
+</head>
+<body ng-app="EpageoApp" ng-controller="Controller" class="contact">
+
+<div ng-include src="'../../partials/header.tmpl.html'"></div>
+<!-- body container start -->
+<div class="circle-content" ng-show="$root.contacts == true">
+  <div id="contact-slider" class="container-carousel carousel slide" data-ride="carousel">
+    
+    <div class="carousel-inner"  role="listbox">
+      <div class="item active">
+        <div class="contact-circle">
+          <div class="circle1 color1">
+            <div class="inner-circle1 color1">
+              <p class="heading">EPAGEO LIMITED</p>
+              <p class="address">27 Old Gloucester Street WC1N 3AX, London United Kingdom</p>
+              <p class="tel">Tel: +44 (0)20 7205 2454<br>Fax: +44 (0)872 115 8806</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="item">
+        <div class="contact-circle">
+          <div class="circle1 color3">
+            <div class="inner-circle1 color3">
+                <p class="heading">INDIA</p>
+                <p class="address">V-114 Sector 12, Noida, U.P. 201301 India</p>
+                <p class="tel">Tel: +44 2072 052 454<br>Fax: +44 8721 158 806</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="contact-circle">
+          <div class="circle1 color2">
+            <div class="inner-circle1 color2">
+              <p class="heading">NETHERLANDS</p>
+              <p class="address">Nico Jessekade 255 1087 NC Amsterdam Netherlands</p>
+              <p class="tel">Tel: +44 2072 052 454<br>Fax: +44 8721 158 806</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#contact-slider" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#contact-slider" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+</div>
+<div class="container" ng-show="$root.contacts == true">    
+
+    <ul class="row divs3 email">
+        <li class="col-sm-4">
+            <div class="heading company">General Inquiries</div>
+            <p class="bold">info@epageo.com</p>
+        </li>
+        <li class="col-sm-4">
+            <div class="heading company">Accounting Department</div>
+            <p class="bold">accounting@epageo.com</p>
+        </li>
+        <li class="col-sm-4">
+            <div class="heading company">Client Support</div>
+            <p class="bold">support@epageo.com</p>
+        </li>
+    </ul>
+</div>
+<div class="container" ng-show="$root.contacts == false">    
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="col-sm-2"></div>
+            <div class="alert alert-danger col-sm-8" id="errorMsg">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h2 class="text-center margin-top-0">Please fix the following issues</h2>
+                <ul id="errorList" class="errorList" style="margin-bottom:35px"></ul>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <form class="contentCentered" method="post" action="http://www.epageo.com/contact" class="cms_form" enctype="multipart/form-data" id="contactForm">
+      <p class="questions-contact row">Do you have questions about our product or services?</p>
+      <div class="row">
+        <div>
+          <label>Full name</label>
+        </div>
+        <input type='text' ng-model="name" id='name' placeholder='Full name'>
+      </div>
+      <div class="row">
+        <div>
+          <label>Company</label>
+        </div>
+        <input type='text' ng-model="company" id='company' placeholder='Comapny'>
+      </div>
+      <div class="row">
+        <div>
+          <label>Country</label>
+        </div>
+        <input type='text' ng-model="country" id='country' placeholder='Country'>
+      </div>
+      <div class="row">
+        <div>
+          <label>Email</label>
+        </div>
+        <input type='text' ng-model="email" id='email' placeholder='Email'>
+      </div>
+      <div class="row">
+        <div>
+          <label>Subject</label>
+        </div>
+        <input type='text' ng-model="subject" id='subject' placeholder='Subject'>
+      </div>
+      <div class="row">
+        <div>
+          <label>Message</label>
+        </div>
+        <textarea ng-model="message" id='message' placeholder='Message' cols="5"></textarea>
+      </div>
+      <div class="row">
+        <div>
+          <button type="submit" class="btn btn-success">Send</button>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <br><br>
+    </div>
+</div>
+<!-- body container end -->
+<script src="../../.tmp/scripts/bower.js"></script>
+<script src="../../.tmp/scripts/core.js"></script>
+<script src="main.js"></script>
+<script src="../../icons/icomatic.js"></script>
+</body>
+</html>

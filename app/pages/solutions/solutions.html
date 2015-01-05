@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en" >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ePageo</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="../../epageo.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../.tmp/styles/main.css">
+    <link rel="stylesheet" href="../../.tmp/styles/app.css">
+    <link rel="stylesheet" href="../../icons/icomatic.css">
+    <link rel="stylesheet" href="../../scss/solution/amazingslider-2.css">
+    <link rel="stylesheet" href="../../scss/solution/amazingslider-3.css">
+</head>
+<body ng-app="EpageoApp" ng-controller="Controller" class="solutions">
+
+<div ng-include src="'../../partials/header.tmpl.html'"></div>
+<!-- body container start -->
+<div class="container">
+    <div ng-include src="'pageManagement.html'" ng-show="$root.solutions == 1"></div>
+    <div ng-include src="'linkingAlgorithm.html'" ng-show="$root.solutions == 2"></div>
+</div>
+
+
+<!-- body container end -->
+
+<script src="../../.tmp/scripts/bower.js"></script>
+<script src="../../.tmp/scripts/core.js"></script>
+<script src="../../icons/icomatic.js"></script>
+<script src="images/amazingslider.js"></script>
+<script src="images/initslider-2.js"></script>
+
+<script type="text/javascript">
+    setTimeout(function() {
+        $(".amazingslider-nav-container-3").css('margin-top', '378px;')
+    }, 5000);
+    
+</script>
+</body>
+</html>

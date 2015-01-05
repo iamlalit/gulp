@@ -1,0 +1,122 @@
+
+.divs3{
+    width: 980px;
+    margin: 0 auto;
+    padding: 80px 20px 100px;
+    &.email{
+        padding:40px 20px 40px;
+    }
+    &.company{
+        #strategy,
+        #platform,
+        #marketing{
+            position: relative;
+            top: 300px;
+        }
+    }
+    li{
+        text-align: center;
+        .heading{
+            font-size: 3rem;
+            line-height:2;
+            font-family: $font-family-headings; 
+            &.company{
+                font-size: 3.5rem;
+                color: $white;
+                background-color: #333333;
+                margin-bottom: 20px;
+            }
+        }
+        p{  
+            font-size: 1.7rem;
+            line-height: 1.4;
+            padding-bottom:5px;
+        }
+        ul{
+            li{
+                font-size: 1.55rem;
+                line-height: 1.4;
+                font-weight: 400;
+            }
+        }
+    }
+    #strategy,
+    #platform,
+    #marketing{
+        position: relative;
+        top: 600px;
+    }
+    #strategy,
+    #platform,
+    #marketing{
+        &.upwards0-strategy{
+            @include animation(upward0 0.1s linear 0s  alternate);
+            top: 150px;
+        }
+        &.upwards1-strategy{
+            @include animation(upward1 0.2s linear 0s  alternate);
+            top: 100px;
+        }
+        &.upwards2-strategy{
+            @include animation(upward2 0.2s linear 0s  alternate);
+            top: 50px;
+        }
+        &.upwards3-strategy{
+            @include animation(upward3 0.2s linear 0s  alternate);
+            top: 0px;
+            margin-bottom: 1rem;
+        }
+
+        &.downwards0-strategy{
+            @include animation(downward0 0.1s linear 0s  alternate);
+            top: 600px;
+        }
+        &.downwards1-strategy{
+            @include animation(downward1 0.2s linear 0s  alternate);
+            top: 150px;
+        }
+        &.downwards2-strategy{
+            @include animation(downward2 0.2s linear 0s  alternate);
+            top: 100px;
+        }
+        &.downwards3-strategy{
+            @include animation(downward3 0.2s linear 0s  alternate);
+            top: 50px;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+@include keyframes(upward0) {
+    0%{top:600px}
+    100%{top:150px}
+}
+@include keyframes(upward1) {
+    0%{top:150px}
+    100%{top:100px}
+}
+@include keyframes(upward2) {
+    0%{top:100px}
+    100%{top:50px}
+}
+@include keyframes(upward3) {
+    0%{top:50px}
+    100%{top:0px}
+}
+
+@include keyframes(downward0) {
+    0%{top:150px}
+    100%{top:600px}
+}
+@include keyframes(downward1) {
+    0%{top:100px}
+    100%{top:150px}
+}
+@include keyframes(downward2) {
+    0%{top:50px}
+    100%{top:100px}
+}
+@include keyframes(downward3) {
+    0%{top:0px}
+    100%{top:50px}
+}

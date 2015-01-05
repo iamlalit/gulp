@@ -1,0 +1,74 @@
+<header class="container">
+  <div class="navbar navbar-default navbar-md navbar-sm navbar-lg">
+   <div class="navbar-header">
+    <span class="navbar-brand" >
+      <a href="../../pages/home/index.html"><img src="../../.tmp/img/ePageo-Logo.png" hover-logo class="logo"/></a>
+    </span>
+        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="../../pages/services/services.html" active-nav data-target="#services">Services &amp; Process</a>
+          </li>
+          <li class="dropdown">
+            <a href="../../pages/solutions/pageManagement.html" active-nav data-target="#solutions">Solutions</a>
+          </li>
+          <li class="dropdown">
+            <a href="../../pages/company/company.html" active-nav data-target="#company">Company</a>
+          </li>
+          <li class="dropdown">
+            <a href="../../pages/contact/contact.html" active-nav data-target="#contact">Contact</a>
+          </li>
+        </ul>
+        <!-- for sub menu -->
+        <div class="container">
+          <nav class="navbar navbar-default" role="navigation" id="submenu">
+            <ul class="nav navbar-nav collapse" id="services">
+              <li class="active"><a href="#">What we do</a></li>
+              <li><a href="#" name="ourApproach">How we do it</a></li>
+            </ul>
+            <ul class="nav navbar-nav collapse" id="solutions">
+              <li id="pageManagement"><a href="../../pages/solutions/pageManagement.html" active-sub-nav>Page management</a></li>
+              <li id="linkingAlgorithm"><a href="../../pages/solutions/linkingAlgorithm.html" active-sub-nav >Linking algorithm</a></li>
+              <li><a href="../../pages/solutions/bannerManagement.html" active-sub-nav>Banner management</a></li>
+              <li><a href="../../pages/solutions/contentWorkflow.html" active-sub-nav>Content workflow</a></li>
+            </ul>
+             <ul class="nav navbar-nav collapse" id="company">
+              <li class="active"><a href="#">About us</a></li>
+              <li><a href="#" name="vision">Vision</a></li>
+            </ul>
+            <ul class="nav navbar-nav collapse" id="contact" ng-init="$root.contacts = true" ng-model="$root.contacts">
+              <li ng-class="{'active': $root.contacts == true}" ng-click="$root.contacts = true"><a href="#">Offices</a></li>
+              <li  ng-class="{'active': $root.contacts == false}" ng-click="$root.contacts = false"><a href="#">Support</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      
+      <!-- Menu to show when page scroll down Start -->
+      <div class="navbar-secondary" id="secondary-navigation">
+        <ul class="navigation hide" id="service-page">
+          <li><a href="#" name="document">Top</a></li>
+          <li class="active"><a href="#" name="whatWeDo">WHAT WE DO</a></li>
+          <li><a href="#" name="ourApproach">OUR APPROACH</a></li>
+        </ul>
+        <ul class="navigation hide" id="company-page">
+          <li><a href="#" name="document">Top</a></li>
+          <li class="active"><a href="#" name="aboutUs">ABOUT US</a></li>
+          <li><a href="#" name="vision">VISION</a></li>
+        </ul>
+        <!-- <ul class="navigation hide" id="contact-page">
+          <li><a href="#" name="document">Top</a></li>
+          <li class="active"><a href="#" name="offices">OFFICES</a></li>
+          <li><a href="#" name="support">SUPPORT</a></li>
+        </ul> -->
+      </div>
+      <!-- Menu to show when page scroll down End -->
+  </div>
+  
+</header>

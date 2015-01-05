@@ -1,0 +1,54 @@
+div#sixth{
+	div{
+		&.color1{
+			width: $width-circle1;
+			height: $width-circle1;
+			background: $color-grey;
+			left: 2px;
+			top: 0px;
+			&.animation0{
+				@include animation(moveX0 1.5s ease-out, moveY0 1.5s ease-out);
+			}
+		}
+		&.color2{
+			width: $width-circle2;
+			height: $width-circle2;
+			background: $color-blue;
+			left: -90px;
+			top: 150px;
+			&.animation1{
+				@include animation(moveX1 .7s linear 0s  alternate, moveY1 1.5s ease-out);
+			}
+		}
+		&.color3{
+			width: $width-circle1;
+			height: $width-circle1;
+			background: $color-pink;
+			left: 345px;
+			top: 150px;
+			&.animation2{
+				@include animation(moveX2 1.5s ease-out, moveY2 1.5s ease-out);
+			}
+		}
+		&.color4{
+			width: $width-circle3;
+			height: $width-circle3;
+			background: $color-orange;
+			left: 462px;
+			top: -200px;	
+			&.animation3{
+				@include animation(moveX3 1.5s ease-out, moveY3 1.5s ease-out);
+			}
+		}
+		&.color5{
+			width: $width-circle3;
+			height: $width-circle3;
+			background: $color-green;
+			left: 91px;
+			top: -65px;	
+			&.animation4{
+				@include animation(moveX4 1.5s ease-out, moveY4 1.5s ease-out);
+			}
+		}
+	}
+}
