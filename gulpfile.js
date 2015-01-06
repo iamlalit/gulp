@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     http = require('http'),
     opn = require('opn'),
+    watch = require('gulp-watch');
     sass = require('gulp-ruby-sass'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
@@ -42,7 +43,7 @@ gulp.task('clean', function(cb) {
  
 gulp.task('sass', function () {
     var dir = config.styles();
-    return gulp.src(dir+'/app.scss')
+    var stream = gulp.src(dir+'/app.scss')
         .pipe(sass({ style: 'expanded' }))
         //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(gulp.dest('app/.tmp/styles'))
@@ -50,11 +51,13 @@ gulp.task('sass', function () {
         .pipe(minifycss())
         .pipe(gulp.dest('app/.tmp/styles'))
         .pipe(notify({ message: 'Styles task complete for app scss' }));
+
+    return stream;
 });
 
 gulp.task('sass-lib', function () {
     var dir = config.styles();
-    return gulp.src(dir+'/bootstrap.scss')
+    var stream = gulp.src(dir+'/bootstrap.scss')
         .pipe(sass({ style: 'expanded' }))
         //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(gulp.dest('app/.tmp/styles'))
@@ -62,47 +65,53 @@ gulp.task('sass-lib', function () {
         .pipe(minifycss())
         .pipe(gulp.dest('app/.tmp/styles'))
         .pipe(notify({ message: 'Styles task complete for bootstrap' }));
+
+    return stream;
 });
 
 gulp.task('scripts-core', function() {
     var dir = config.scripts();
-        return gulp.src(dir)
-        //.pipe(jshint('.jshintrc'))
-        //.pipe(jshint.reporter('default'))
-        .pipe(concat('core.js'))
-        .pipe(gulp.dest('app/.tmp/scripts'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/.tmp/scripts'))
-        .pipe(notify({ message: 'Scripts task complete for user js' }));
+    var stream = gulp.src(dir)
+    //.pipe(jshint('.jshintrc'))
+    //.pipe(jshint.reporter('default'))
+    .pipe(concat('core.js'))
+    .pipe(gulp.dest('app/.tmp/scripts'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('app/.tmp/scripts'))
+    .pipe(notify({ message: 'Scripts task complete for user js' }));
+
+    return stream;
 });
 
 gulp.task('scripts-lib', function() {
     var dir = config.scripts();
-        return gulp.src([
-              'lib/jquery/dist/jquery.js',
-              'lib/angularjs/angular.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
-              'lib/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
-                   ]
-               )
-        .pipe(concat('bower.js'))
-        .pipe(gulp.dest('app/.tmp/scripts'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest('app/.tmp/scripts'))
-        .pipe(notify({ message: 'Scripts task complete for libraries' }));
+    var stream = gulp.src([
+      'lib/jquery/dist/jquery.js',
+      'lib/angularjs/angular.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/button.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js',
+      'lib/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js',
+           ]
+       )
+    .pipe(concat('bower.js'))
+    .pipe(gulp.dest('app/.tmp/scripts'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('app/.tmp/scripts'))
+    .pipe(notify({ message: 'Scripts task complete for libraries' }));
+
+    return stream;
 });
 
 gulp.task('connect', function() {
@@ -118,57 +127,50 @@ gulp.task('connect', function() {
             opn('http://localhost:' + config.port + '/pages/home/index.html');
         });
 });
- 
-gulp.task('server', ['build', 'sass', 'sass-lib','scripts-core', 'scripts-lib', 'connect', 'imagesmin'], function() {
-    var jsPath = config.scripts(),
-        cssPath = config.styles(),
-        htmlPath = config.html(),
-        server = livereload();
- 
-    gulp.watch(cssPath + '/**/*.scss', ['sass']);
- 
-    gulp.watch([cssPath + '/**/*.scss', jsPath, htmlPath]).on('change', function (file) {
-        server.changed(file.path);
-    });
-});
 
 gulp.task('imagesmin', function () {
-    return gulp.src(config.app + '/**/*.{gif,jpeg,jpg,png}')
+    var stream = gulp.src(config.app + '/**/*.{gif,jpeg,jpg,png}')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(config.app + '/.tmp/img/'));
+        .pipe(gulp.dest(config.app + '/.tmp/'));
+    return stream;
 });
  
 gulp.task('fonts', function(){
     var cssPath = config.styles();
  
-    return gulp.src(cssPath + '/fonts/*')
-        .pipe(gulp.dest(config.dist + '/styles/fonts'));
-});
- 
-gulp.task('misc', function(){
-    return gulp.src([
-            config.app + '/*.{ico,png,svg,jpeg,jpg}',
-            config.app + '/.htaccess'
-        ])
-        .pipe(gulp.dest(config.dist));
+    var stream = gulp.src(config.app + '/fonts/*')
+        .pipe(gulp.dest(config.app + '/.tmp/fonts/bootstrap/'));
+    return stream;
 });
  
 gulp.task('html', ['sass'], function(){
     var htmlPath = config.html();
  
-    return gulp.src(htmlPath)
+    var stream = gulp.src(htmlPath)
         .pipe(useref.assets())
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifyCss()))
         .pipe(useref.restore())
         .pipe(useref())
         .pipe(gulp.dest(config.dist));
+
+    return stream;
 });
- 
-gulp.task('build', ['clean'], function(){
-    gulp.start('clean', 'imagesmin', 'fonts', 'misc', 'html');
+
+gulp.task('watch', function() {
+  gulp.watch(config.styles() + '/**/*.scss', ['sass']);
+  gulp.watch(config.scripts(), ['scripts-core']);
+  gulp.watch(config.app + '/img/**/*', ['imagesmin']);
+});
+
+gulp.task('server', ['watch', 'sass', 'sass-lib','scripts-core', 'scripts-lib', 'imagesmin', 'fonts'], function() {
+    gulp.start('connect'); 
+});
+
+gulp.task('build', function(){
+    gulp.start('clean', 'imagesmin', 'fonts', 'html');
 });
