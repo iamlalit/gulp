@@ -1,7 +1,6 @@
 //Bourbon
 @import 'bourbon';
 
-@import 'base';
 @import 'bootstrap-compass';
 @import 'bootstrap-mincer';
 @import 'bootstrap-sprockets';
@@ -10,35 +9,6 @@
 @import 'theme/_layout';
 @import 'theme/_palette';
 @import 'theme/_typography';
-
-//base
-@import 'base/base';
-//@import 'base/icons';
-@import 'base/helpers';
-@import 'base/states';
-
-@import 'components/footer';
-@import 'components/header';
-@import 'components/body';
-
-//jumping balls on service page
-
-@import 'components/jumpingBalls/ball1';
-@import 'components/jumpingBalls/ball2';
-@import 'components/jumpingBalls/ball3';
-@import 'components/jumpingBalls/ball4';
-@import 'components/jumpingBalls/ball5';
-@import 'components/jumpingBalls/ball6';
-@import 'components/jumpingBalls/ball7';
-
-//logo
-@import 'components/logo';
-
-//for 3 div animation on service page
-@import 'components/3divAnimation/3divAnimation';
-
-//for contact page circles
-@import 'contact/contact';
 
 //for home page
 @import 'index/index';
