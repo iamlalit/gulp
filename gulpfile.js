@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     connect = require('connect'),
+    runSequence = require('run-sequence');
     concat = require('gulp-concat'),
     http = require('http'),
     opn = require('opn'),
@@ -24,7 +25,7 @@ var gulp = require('gulp'),
         dist: 'dist',
         port: 9002,
         scripts: function () {
-            return this.app + '/scripts/**/*.js';
+            return this.app + '/scripts';
         },
         styles: function () {
             return this.app + '/scss';
@@ -71,7 +72,10 @@ gulp.task('sass-lib', function () {
 
 gulp.task('scripts-core', function() {
     var dir = config.scripts();
-    var stream = gulp.src(dir)
+    var stream = gulp.src([
+                          dir+'/app.js',
+                          dir+'/icomatic.js',
+                          ])
     //.pipe(jshint('.jshintrc'))
     //.pipe(jshint.reporter('default'))
     .pipe(concat('core.js'))
@@ -127,18 +131,18 @@ gulp.task('connect', function() {
             opn('http://localhost:' + config.port + '/pages/home/index.html');
         });
 });
-
+ 
 gulp.task('imagesmin', function () {
-    var stream = gulp.src(config.app + '/**/*.{gif,jpeg,jpg,png}')
+    var stream = gulp.src(config.app + 'img/*')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(config.app + '/.tmp/'));
+        .pipe(gulp.dest('app/.tmp/img/'));
     return stream;
 });
- 
+
 gulp.task('fonts', function(){
     var cssPath = config.styles();
  
@@ -163,14 +167,16 @@ gulp.task('html', ['sass'], function(){
 
 gulp.task('watch', function() {
   gulp.watch(config.styles() + '/**/*.scss', ['sass']);
-  gulp.watch(config.scripts(), ['scripts-core']);
+  gulp.watch(config.scripts()+ '/**/*.js', ['scripts-core']);
   gulp.watch(config.app + '/img/**/*', ['imagesmin']);
 });
 
-gulp.task('server', ['watch', 'sass', 'sass-lib','scripts-core', 'scripts-lib', 'imagesmin', 'fonts'], function() {
+gulp.task('server', ['build', 'watch'], function() {
     gulp.start('connect'); 
 });
 
-gulp.task('build', function(){
-    gulp.start('clean', 'imagesmin', 'fonts', 'html');
+gulp.task('build', function(callback) {
+  runSequence('clean',
+        ['sass', 'sass-lib','scripts-core', 'scripts-lib', 'imagesmin', 'fonts'],
+        callback);
 });
